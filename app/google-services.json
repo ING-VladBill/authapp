@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "268033247875",
+    "project_id": "authfirebaseappjulon",
+    "storage_bucket": "authfirebaseappjulon.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:268033247875:android:bf7781b70a61f50e8a29b6",
+        "android_client_info": {
+          "package_name": "com.authfirebaseappjulon.authfirebaseappjulon"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1tp0L5Zaobxv2X6Cu3lRvY9kV_p_zwts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
