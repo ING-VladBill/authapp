@@ -61,13 +61,13 @@ fun HomeScreen(navController: NavController) {
             GlassCard(modifier = Modifier.fillMaxWidth()) {
                 Column {
                     Text(
-                        text = "Hola de nuevo",
+                        text = "Bienvenido a tu aula digital",
                         style = MaterialTheme.typography.headlineLarge,
                         color = MaterialTheme.colorScheme.onSurface
                     )
                     Spacer(Modifier.height(6.dp))
                     Text(
-                        text = email.ifBlank { "Usuario autenticado" },
+                        text = email.ifBlank { "Estudiante autenticado" },
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.outline
                     )
@@ -88,12 +88,12 @@ fun HomeScreen(navController: NavController) {
                                 .padding(20.dp)
                         ) {
                             Text(
-                                text = "Cursos en la nube",
+                                text = "Gestión académica de cursos",
                                 style = MaterialTheme.typography.titleLarge,
                                 color = Color.White
                             )
                             Text(
-                                text = "Registra, edita y consulta tus cursos desde Firestore.",
+                                text = "Organiza tus materias, docentes y créditos como en una plataforma educativa.",
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = Color.White.copy(alpha = 0.86f)
                             )
@@ -113,7 +113,7 @@ fun HomeScreen(navController: NavController) {
                         shape = RoundedCornerShape(18.dp),
                         elevation = ButtonDefaults.buttonElevation(defaultElevation = 10.dp)
                     ) {
-                        Text("Ver mis cursos", fontWeight = FontWeight.Bold)
+                        Text("Abrir aula de cursos", fontWeight = FontWeight.Bold)
                     }
 
                     Spacer(Modifier.height(10.dp))
@@ -127,7 +127,7 @@ fun HomeScreen(navController: NavController) {
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(18.dp)
                     ) {
-                        Text("Cerrar sesión", color = CoralAccent)
+                        Text("Salir del aula", color = CoralAccent)
                     }
                 }
             }

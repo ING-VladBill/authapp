@@ -138,11 +138,11 @@ fun CursosScreen(navController: NavController) {
     fun guardarCurso() {
         mensaje = null
         if (userId.isBlank()) {
-            mensaje = "Debes iniciar sesión para registrar cursos"
+            mensaje = "Debes iniciar sesión para registrar materias"
             return
         }
         if (nombre.isBlank()) {
-            mensaje = "El nombre del curso es obligatorio"
+            mensaje = "El nombre de la materia es obligatorio"
             return
         }
 
@@ -158,32 +158,32 @@ fun CursosScreen(navController: NavController) {
                 .add(datos)
                 .addOnSuccessListener {
                     cerrarFormulario()
-                    mensaje = "Curso agregado correctamente"
+                    mensaje = "Materia registrada correctamente"
                 }
-                .addOnFailureListener { mensaje = "Error al agregar curso: ${it.message}" }
+                .addOnFailureListener { mensaje = "Error al registrar materia: ${it.message}" }
         } else {
             db.collection("cursos")
                 .document(editandoId!!)
                 .set(datos)
                 .addOnSuccessListener {
                     cerrarFormulario()
-                    mensaje = "Curso actualizado correctamente"
+                    mensaje = "Materia actualizada correctamente"
                 }
-                .addOnFailureListener { mensaje = "Error al actualizar curso: ${it.message}" }
+                .addOnFailureListener { mensaje = "Error al actualizar materia: ${it.message}" }
         }
     }
 
     fun eliminarCurso(curso: Curso) {
         if (curso.userId != userId) {
-            mensaje = "No puedes eliminar cursos de otro usuario"
+            mensaje = "No puedes eliminar materias de otra cuenta académica"
             return
         }
 
         db.collection("cursos")
             .document(curso.id)
             .delete()
-            .addOnSuccessListener { mensaje = "Curso eliminado" }
-            .addOnFailureListener { mensaje = "Error al eliminar curso: ${it.message}" }
+            .addOnSuccessListener { mensaje = "Materia eliminada" }
+            .addOnFailureListener { mensaje = "Error al eliminar materia: ${it.message}" }
     }
 
     fun cargarCurso(curso: Curso) {
@@ -200,7 +200,7 @@ fun CursosScreen(navController: NavController) {
             containerColor = Color.Transparent,
             topBar = {
                 TopAppBar(
-                    title = { Text("Mis Cursos", fontWeight = FontWeight.Bold) },
+                    title = { Text("Aula de Cursos", fontWeight = FontWeight.Bold) },
                     navigationIcon = {
                         TextButton(onClick = { navController.popBackStack() }) {
                             Text("Atrás", color = Color.White)
@@ -238,7 +238,7 @@ fun CursosScreen(navController: NavController) {
                 ) {
                     Column(modifier = Modifier.padding(20.dp)) {
                         Text(
-                            text = "Tus cursos guardados",
+                            text = "Catálogo académico",
                             style = MaterialTheme.typography.titleLarge,
                             color = MaterialTheme.colorScheme.onSurface
                         )
@@ -260,7 +260,7 @@ fun CursosScreen(navController: NavController) {
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Column {
-                                Text("Total registrados", color = Color.White.copy(alpha = 0.85f))
+                                Text("Cursos inscritos", color = Color.White.copy(alpha = 0.85f))
                                 Text(
                                     text = cursos.size.toString(),
                                     style = MaterialTheme.typography.headlineMedium,
@@ -268,7 +268,7 @@ fun CursosScreen(navController: NavController) {
                                     fontWeight = FontWeight.ExtraBold
                                 )
                             }
-                            Text("Pulsa + para crear", color = Color.White.copy(alpha = 0.9f))
+                            Text("Pulsa + para registrar", color = Color.White.copy(alpha = 0.9f))
                         }
                     }
                 }
@@ -290,7 +290,7 @@ fun CursosScreen(navController: NavController) {
                             colors = CardDefaults.cardColors(containerColor = Color.White.copy(alpha = 0.86f))
                         ) {
                             Text(
-                                text = "Aún no tienes cursos. Toca el botón + para registrar el primero.",
+                                text = "Aún no tienes cursos en tu aula. Toca el botón + para registrar tu primera materia.",
                                 modifier = Modifier.padding(22.dp),
                                 style = MaterialTheme.typography.bodyLarge,
                                 color = MaterialTheme.colorScheme.outline
@@ -319,13 +319,13 @@ fun CursosScreen(navController: NavController) {
             onDismissRequest = { cerrarFormulario() },
             shape = RoundedCornerShape(28.dp),
             containerColor = Color.White,
-            title = { Text(if (editandoId == null) "Nuevo curso" else "Editar curso", fontWeight = FontWeight.Bold) },
+            title = { Text(if (editandoId == null) "Nueva materia" else "Editar materia", fontWeight = FontWeight.Bold) },
             text = {
                 Column {
                     OutlinedTextField(
                         value = nombre,
                         onValueChange = { nombre = it },
-                        label = { Text("Nombre del curso *") },
+                        label = { Text("Nombre de la materia *") },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(18.dp)
@@ -334,7 +334,7 @@ fun CursosScreen(navController: NavController) {
                     OutlinedTextField(
                         value = profesor,
                         onValueChange = { profesor = it },
-                        label = { Text("Profesor") },
+                        label = { Text("Docente") },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(18.dp)
@@ -343,7 +343,7 @@ fun CursosScreen(navController: NavController) {
                     OutlinedTextField(
                         value = creditos,
                         onValueChange = { creditos = it },
-                        label = { Text("Créditos") },
+                        label = { Text("Créditos académicos") },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(18.dp)
@@ -352,7 +352,7 @@ fun CursosScreen(navController: NavController) {
             },
             confirmButton = {
                 Button(onClick = { guardarCurso() }, shape = RoundedCornerShape(16.dp)) {
-                    Text(if (editandoId == null) "Agregar" else "Guardar")
+                    Text(if (editandoId == null) "Registrar materia" else "Guardar cambios")
                 }
             },
             dismissButton = {
@@ -395,8 +395,8 @@ private fun CursoCard(curso: Curso, onEditar: () -> Unit, onEliminar: () -> Unit
                     .padding(horizontal = 14.dp)
             ) {
                 Text(curso.nombre, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                if (curso.profesor.isNotBlank()) Text("Profesor: ${curso.profesor}", color = MaterialTheme.colorScheme.outline)
-                if (curso.creditos.isNotBlank()) Text("Créditos: ${curso.creditos}", color = MaterialTheme.colorScheme.outline)
+                if (curso.profesor.isNotBlank()) Text("Docente: ${curso.profesor}", color = MaterialTheme.colorScheme.outline)
+                if (curso.creditos.isNotBlank()) Text("Créditos académicos: ${curso.creditos}", color = MaterialTheme.colorScheme.outline)
             }
             Column(horizontalAlignment = Alignment.End) {
                 TextButton(onClick = onEditar) { Text("Editar") }

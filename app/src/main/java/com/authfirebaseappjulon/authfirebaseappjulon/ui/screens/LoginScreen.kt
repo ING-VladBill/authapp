@@ -59,12 +59,12 @@ fun LoginScreen(navController: NavController) {
                 GlassCard(modifier = Modifier.fillMaxWidth()) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Text(
-                            text = "Bienvenido",
+                            text = "Bienvenido a tu aula",
                             style = MaterialTheme.typography.headlineLarge,
                             color = MaterialTheme.colorScheme.onSurface
                         )
                         Text(
-                            text = "Inicia sesión para administrar tus cursos",
+                            text = "Inicia sesión para continuar tu gestión académica",
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.outline
                         )
@@ -73,7 +73,7 @@ fun LoginScreen(navController: NavController) {
                         OutlinedTextField(
                             value = email,
                             onValueChange = { email = it },
-                            label = { Text("Correo electrónico") },
+                            label = { Text("Correo institucional") },
                             singleLine = true,
                             modifier = Modifier.fillMaxWidth(),
                             shape = RoundedCornerShape(18.dp)
@@ -122,14 +122,14 @@ fun LoginScreen(navController: NavController) {
                             elevation = ButtonDefaults.buttonElevation(defaultElevation = 8.dp)
                         ) {
                             Text(
-                                text = if (cargando) "Ingresando..." else "Ingresar",
+                                text = if (cargando) "Ingresando..." else "Entrar al aula",
                                 fontWeight = FontWeight.Bold
                             )
                         }
 
                         Spacer(Modifier.height(10.dp))
                         TextButton(onClick = { navController.navigate("register") }) {
-                            Text("¿No tienes cuenta? Regístrate")
+                            Text("¿Nuevo estudiante? Crea tu cuenta")
                         }
                     }
                 }

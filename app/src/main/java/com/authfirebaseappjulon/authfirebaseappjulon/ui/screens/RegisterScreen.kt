@@ -60,12 +60,12 @@ fun RegisterScreen(navController: NavController) {
                 GlassCard(modifier = Modifier.fillMaxWidth()) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Text(
-                            text = "Crear cuenta",
+                            text = "Crear cuenta académica",
                             style = MaterialTheme.typography.headlineLarge,
                             color = MaterialTheme.colorScheme.onSurface
                         )
                         Text(
-                            text = "Regístrate para guardar tus cursos en la nube",
+                            text = "Regístrate para organizar tus cursos y créditos",
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.outline
                         )
@@ -74,7 +74,7 @@ fun RegisterScreen(navController: NavController) {
                         OutlinedTextField(
                             value = email,
                             onValueChange = { email = it },
-                            label = { Text("Correo electrónico") },
+                            label = { Text("Correo institucional") },
                             singleLine = true,
                             modifier = Modifier.fillMaxWidth(),
                             shape = RoundedCornerShape(18.dp)
@@ -141,7 +141,7 @@ fun RegisterScreen(navController: NavController) {
                             shape = RoundedCornerShape(18.dp),
                             elevation = ButtonDefaults.buttonElevation(defaultElevation = 8.dp)
                         ) {
-                            Text(if (cargando) "Registrando..." else "Registrarme", fontWeight = FontWeight.Bold)
+                            Text(if (cargando) "Registrando..." else "Crear cuenta de estudiante", fontWeight = FontWeight.Bold)
                         }
 
                         Spacer(Modifier.height(10.dp))
@@ -150,7 +150,7 @@ fun RegisterScreen(navController: NavController) {
                             modifier = Modifier.fillMaxWidth(),
                             shape = RoundedCornerShape(18.dp)
                         ) {
-                            Text("Ya tengo cuenta")
+                            Text("Ya tengo cuenta académica")
                         }
                     }
                 }
