@@ -13,9 +13,10 @@ import com.google.firebase.auth.FirebaseAuth
 @Composable
 fun RegisterScreen(navController: NavController) {
     val auth = FirebaseAuth.getInstance()
-    var email    by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var error    by remember { mutableStateOf<String?>(null) }
+    var confirmPassword by remember { mutableStateOf("") }
+    var error by remember { mutableStateOf<String?>(null) }
     var cargando by remember { mutableStateOf(false) }
 
     Column(
@@ -40,13 +41,21 @@ fun RegisterScreen(navController: NavController) {
         OutlinedTextField(
             value = password,
             onValueChange = { password = it },
-            label = { Text("Contraseña (mínimo 6 caracteres)") },
+            label = { Text("Contraseña") },
             singleLine = true,
             visualTransformation = PasswordVisualTransformation(),
             modifier = Modifier.fillMaxWidth()
         )
+        Spacer(Modifier.height(12.dp))
 
-
+        OutlinedTextField(
+            value = confirmPassword,
+            onValueChange = { confirmPassword = it },
+            label = { Text("Confirmar contraseña") },
+            singleLine = true,
+            visualTransformation = PasswordVisualTransformation(),
+            modifier = Modifier.fillMaxWidth()
+        )
 
         if (error != null) {
             Spacer(Modifier.height(8.dp))
@@ -57,10 +66,23 @@ fun RegisterScreen(navController: NavController) {
 
         Button(
             onClick = {
-                if (email.isBlank() || password.length < 6) {
-                    error = "Correo válido y contraseña de 6+ caracteres"
+                error = null
+
+                if (email.isBlank() || password.isBlank() || confirmPassword.isBlank()) {
+                    error = "Completa todos los campos"
                     return@Button
                 }
+
+                if (password != confirmPassword) {
+                    error = "Las contraseñas no coinciden"
+                    return@Button
+                }
+
+                if (password.length < 6) {
+                    error = "La contraseña debe tener mínimo 6 caracteres"
+                    return@Button
+                }
+
                 cargando = true
                 auth.createUserWithEmailAndPassword(email.trim(), password)
                     .addOnCompleteListener { task ->
@@ -70,7 +92,7 @@ fun RegisterScreen(navController: NavController) {
                                 popUpTo("login") { inclusive = true }
                             }
                         } else {
-                            error = task.exception?.message ?: "Error al registrar"
+                            error = task.exception?.message ?: "Error al registrar usuario"
                         }
                     }
             },

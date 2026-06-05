@@ -55,6 +55,8 @@ fun LoginScreen(navController: NavController) {
 
         Button(
             onClick = {
+                error = null
+
                 if (email.isBlank() || password.isBlank()) {
                     error = "Completa todos los campos"
                     return@Button
